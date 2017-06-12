@@ -8,21 +8,6 @@ int Kernel::get_nflop() {
   return nflop;
 }
 
-void Kernel::init(int n) {
-}
-
-void Kernel::calc(int n_, int nitr_) {
-}
-
-void Kernel::fin(int n) {
-}
-
-void KernelMVM::init(int n) {
-}
-
-/*void KernelMVM::calc(int n_, int nitr_) {
-}*/
-
 KernelMVM::KernelMVM() {
   cout << "constructor of KernelMVM" << endl;
   dim = 2;

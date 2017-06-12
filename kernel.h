@@ -29,9 +29,9 @@ void dummy(Eigen::VectorXd val);
 class Kernel {
 public:
   void doProcess();
-  virtual void init(int n);
-  virtual void calc(int n_, int nitr_);
-  virtual void fin(int n);
+  virtual void init(int n) = 0;
+  virtual void calc(int n_, int nitr_) = 0;
+  virtual void fin(int n) = 0;
   int get_dim();
   int get_nflop();
 protected:
@@ -43,8 +43,6 @@ protected:
 class KernelMVM : public Kernel {
 public:
   KernelMVM();
-  void init(int n);
-  //void calc(int n_, int nitr_);
 };
 
 class KernelMVMClassic : public KernelMVM {
