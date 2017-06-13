@@ -101,5 +101,20 @@ public:
   void calc(int n_, int nitr_);
 };
 
+class KernelAdd : public Kernel {
+protected:
+  double* v1;
+  double* v2;
+  double* v3;
+public:
+  KernelAdd();
+};
+
+class KernelAddClassic : public KernelAdd {
+public:
+  void init(int n);
+  void calc(int n_, int nitr_);
+  void fin(int n);
+};
 
 #endif

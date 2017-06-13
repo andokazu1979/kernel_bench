@@ -171,4 +171,36 @@ void KernelScalingClassic::calc(int n_, int nitr_) {
   }
 }
 
+KernelAdd::KernelAdd() {
+  cout << "constructor of KernelAdd" << endl;
+  dim = 1;
+  nflop = 1;
+}
+
+void KernelAddClassic::init(int n) {
+  v1 = new double[n];
+  v2 = new double[n];
+  v3 = new double[n];
+
+  for(int i = 0; i < n; i++) {
+    v1[i] = (double)rand();
+    v2[i] = (double)rand();
+    v3[i] = (double)rand();
+  } 
+}
+
+void KernelAddClassic::calc(int n_, int nitr_) {
+  for(int itr = 0; itr < nitr_; itr++) {
+    for(int i = 0; i < n_; i++) {
+      v3[i] = v1[i] + v2[i];
+    }
+    if(v3[n_-1] < 0) dummy(v3);
+  }
+}
+
+void KernelAddClassic::fin(int n) {
+  delete[] v1;
+  delete[] v2;
+  delete[] v3;
+}
 

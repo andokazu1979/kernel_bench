@@ -4,7 +4,8 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
   //KernelBench kernelbench(new KernelMVMEigen(), new TimerGetTimeOfDayUsec(), 30000);
-  KernelBench kernelbench(new KernelScalingClassic(), new TimerGetTimeOfDayUsec(), 30000);
+  //KernelBench kernelbench(new KernelScalingClassic(), new TimerGetTimeOfDayUsec(), 30000);
+  KernelBench kernelbench(new KernelAddClassic(), new TimerGetTimeOfDayUsec(), 30000);
 
   kernelbench.doProcess();
 
