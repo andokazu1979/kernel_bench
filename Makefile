@@ -21,9 +21,17 @@ OBJS = kernel_bench.o kernel.o timer.o
 # CBLAS support
 CBLAS=OFF
 
+# Eigen support
+EIGEN=OFF
+
 ifeq ($(CBLAS),ON)
   CXX = icpc
   CXXFLAGS += -DCBLAS -mkl
+endif
+
+ifeq ($(EIGEN),ON)
+  CXX = icpc
+  CXXFLAGS += -DEIGEN -I ~/eigen-eigen-XXXXXXXXXXXX
 endif
 
 ##############################
