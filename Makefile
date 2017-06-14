@@ -15,6 +15,18 @@ EXEC = kernel_bench
 OBJS = kernel_bench.o kernel.o timer.o
 
 ##############################
+# Options
+##############################
+
+# CBLAS support
+CBLAS=OFF
+
+ifeq ($(CBLAS),ON)
+  CXX = icpc
+  CXXFLAGS += -DCBLAS -mkl
+endif
+
+##############################
 # Make rules
 ##############################
 
