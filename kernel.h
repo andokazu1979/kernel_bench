@@ -117,4 +117,13 @@ public:
   void fin(int n);
 };
 
+#ifdef CUDA
+class KernelAddCuda : public KernelAdd {
+public:
+  void init(int n);
+  void calc(int n_, int nitr_);
+  void fin(int n);
+};
+#endif
+
 #endif
