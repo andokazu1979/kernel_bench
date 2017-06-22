@@ -12,7 +12,7 @@ CXXFLAGS =
 EXEC = kernel_bench
 
 # OBJS: object files to link
-OBJS = kernel_bench.o kernel.o timer.o kernel_cuda.o 
+OBJS = kernel_bench.o kernel.o timer.o 
 
 ##############################
 # Options
@@ -41,6 +41,7 @@ ifeq ($(CUDA),ON)
   NVCC = nvcc
   NVCCFLAGS += -DCUDA
   CXXFLAGS += -DCUDA -L/usr/local/cuda/lib64 -lcuda -lcudart 
+  OBJS += kernel_cuda.o
 endif
 
 ##############################
