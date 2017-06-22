@@ -8,6 +8,9 @@ CXX = g++
 # CXXFLAGS: C++ compiler options
 CXXFLAGS = 
 
+# LDFLAGS: Linker options
+LDFLAGS =
+
 # EXEC: Executable
 EXEC = kernel_bench
 
@@ -29,7 +32,8 @@ CUDA=OFF
 
 ifeq ($(CBLAS),ON)
   CXX = icpc
-  CXXFLAGS += -DCBLAS -mkl
+  CXXFLAGS += -DCBLAS
+  LDFLAGS += -mkl
 endif
 
 ifeq ($(EIGEN),ON)
@@ -40,7 +44,8 @@ endif
 ifeq ($(CUDA),ON)
   NVCC = nvcc
   NVCCFLAGS += -DCUDA
-  CXXFLAGS += -DCUDA -L/usr/local/cuda/lib64 -lcuda -lcudart 
+  CXXFLAGS += -DCUDA
+  LDFLAGS += -L/usr/local/cuda/lib64 -lcuda -lcudart
   OBJS += kernel_cuda.o
 endif
 
@@ -50,7 +55,7 @@ endif
 
 # Link all objects and create executable binary file
 $(EXEC): $(OBJS)
-	$(CXX) -o $@ $(CXXFLAGS) $^
+	$(CXX) -o $@ $(LDFLAGS) $^
 
 # Make rule for c++ source code
 %.o: %.cpp
