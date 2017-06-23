@@ -19,7 +19,7 @@ void KernelAddCuda::init(int n) {
   for(int i = 0; i < n; i++) {
     v1[i] = (double)rand();
     v2[i] = (double)rand();
-    v3[i] = (double)rand();
+    v3[i] = 0.0f;
   } 
 }
 
