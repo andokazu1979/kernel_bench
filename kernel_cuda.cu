@@ -26,6 +26,7 @@ void KernelAddCuda::init(int n) {
 void KernelAddCuda::calc(int n_, int nitr_) {
   for(int itr = 0; itr < nitr_; itr++) {
     add<<<1, 256>>>(n_, v1, v2, v3);
+    cudaDeviceSynchronize();
     if(v3[n_-1] < 0) dummy(v3);
   }
 }
