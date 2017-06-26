@@ -43,7 +43,7 @@ endif
 
 ifeq ($(CUDA),ON)
   NVCC = nvcc
-  NVCCFLAGS += -DCUDA
+  NVCCFLAGS += -DCUDA -arch=sm_60
   CXXFLAGS += -DCUDA
   LDFLAGS += -L/usr/local/cuda/lib64 -lcuda -lcudart
   OBJS += kernel_cuda.o
