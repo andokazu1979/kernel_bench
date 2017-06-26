@@ -17,13 +17,14 @@ KernelBench::KernelBench(Kernel* kernel_, Timer* timer_, int nmax) {
 
   kernel = kernel_;
   timer = timer_;
+  int interval = 10000;
 
-  size = nmax / 10;
+  size = nmax / interval;
   n = new int[size];
   nitr = new int[size];
 
   for(int i = 0; i < size; i++) {
-    n[i] = 10 + i * 10;
+    n[i] = interval + i * interval;
     nitr[i] = pow((double)nmax / (double)n[i], kernel->get_dim());
   }
 }
