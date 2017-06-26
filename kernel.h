@@ -124,6 +124,13 @@ public:
   void calc(int n_, int nitr_);
   void fin(int n);
 };
+
+class KernelAddCuda2 : public KernelAdd {
+public:
+  void init(int n);
+  void calc(int n_, int nitr_);
+  void fin(int n);
+};
 #endif
 
 #endif
