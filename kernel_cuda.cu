@@ -55,10 +55,10 @@ void KernelAddCuda2::init(int n) {
 }
 
 void KernelAddCuda2::calc(int n_, int nitr_) {
-  dim3 block(1);
+  dim3 block(n_);
   dim3 grid((n_ + block.x - 1) / block.x);
   for(int itr = 0; itr < nitr_; itr++) {
-    add2<<<block, grid>>>(n_, v1, v2, v3);
+    add2<<<grid, block>>>(n_, v1, v2, v3);
     cudaDeviceSynchronize();
     if(v3[n_-1] < 0) dummy(v3);
   }
