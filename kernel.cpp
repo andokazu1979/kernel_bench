@@ -22,7 +22,7 @@ void KernelMVMClassic::init(int n) {
   for(int i = 0; i < n; i++) {
     m[i] = new double[n];
     rv[i] = 0.0f;
-#ifdef DEBUG
+#if 1
     v[i] = 1.0f;
     for(int j = 0; j < n; j++) {
       m[i][j] = (double)(i * n + j);
@@ -55,6 +55,16 @@ void KernelMVMClassic::fin(int n) {
   delete[] m;
   delete[] v;
   delete[] rv;
+}
+
+void KernelMVMClassic::show(int n) {
+    for(int i = 0; i < n; i++) {
+      for(int j = 0; j < n; j++) {
+        cout << rv[i];
+        if(j != n - 1) cout << ", ";
+      }
+      cout << endl;
+    }
 }
 
 #ifdef CBLAS
@@ -150,15 +160,23 @@ KernelScaling::KernelScaling() {
 void KernelScaling::init(int n) {
   v = new double[n];
 
-  scale = (double)rand();
+  //scale = (double)rand();
+  scale = (double)10;
 
   for(int i = 0; i < n; i++) {
-    v[i] = (double)rand();
+    //v[i] = (double)rand();
+    v[i] = (double)i;
   } 
 }
 
 void KernelScaling::fin(int n) {
   delete[] v;
+}
+
+void KernelScaling::show(int n) {
+    for(int i = 0; i < n; i++) {
+        cout << v[i] << endl;
+    }
 }
 
 void KernelScalingClassic::calc(int n_, int nitr_) {
@@ -177,14 +195,22 @@ KernelAdd::KernelAdd() {
   nflop = 1;
 }
 
+void KernelAdd::show(int n) {
+    for(int i = 0; i < n; i++) {
+        cout << v3[i] << endl;
+    }
+}
+
 void KernelAddClassic::init(int n) {
   v1 = new double[n];
   v2 = new double[n];
   v3 = new double[n];
 
   for(int i = 0; i < n; i++) {
-    v1[i] = (double)rand();
-    v2[i] = (double)rand();
+    //v1[i] = (double)rand();
+    v1[i] = (double)i;
+    //v2[i] = (double)rand();
+    v2[i] = (double)i;
     v3[i] = 0.0f;
   } 
 }

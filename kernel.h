@@ -34,6 +34,7 @@ public:
   virtual void fin(int n) = 0;
   int get_dim();
   int get_nflop();
+  virtual void show(int n) = 0;
 protected:
   int dim;
   int nflop;
@@ -53,6 +54,7 @@ public:
   void init(int n);
   void calc(int n_, int nitr_);
   void fin(int n);
+  void show(int n);
 };
 
 #ifdef CBLAS
@@ -94,6 +96,7 @@ public:
   KernelScaling();
   void init(int n);
   void fin(int n);
+  void show(int n);
 };
 
 class KernelScalingClassic : public KernelScaling {
@@ -108,6 +111,7 @@ protected:
   double* v3;
 public:
   KernelAdd();
+  void show(int n);
 };
 
 class KernelAddClassic : public KernelAdd {

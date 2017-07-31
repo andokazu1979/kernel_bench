@@ -8,6 +8,7 @@ int main(int argc, char* argv[]) {
   KernelBench kernelbench(new KernelAddClassic(), new TimerGetTimeOfDayUsec(), 30000);
 
   kernelbench.doProcess();
+  //kernelbench.check(3);
 
   return 0;
 }
@@ -50,5 +51,12 @@ void KernelBench::print(int count) {
   cout << n[count] << "," << nitr[count] << "," << timer->get_elapse() << "," 
     //<< timer->get_mflops(2 * nitr[count] * pow(n[count], kernel->get_dim())) << endl;
     << timer->get_mflops(kernel->get_nflop() * nitr[count] * pow(n[count], kernel->get_dim())) << endl;
+}
+
+void KernelBench::check(int n) {
+    kernel->init(n);
+    kernel->calc(n, 1);
+    kernel->show(n);
+    kernel->fin(n);
 }
 

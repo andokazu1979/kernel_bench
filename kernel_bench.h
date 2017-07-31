@@ -16,6 +16,7 @@ class KernelBench {
 public:
   void doProcess();
   KernelBench(Kernel* kernel_, Timer* timer_, int nmax);
+  void check(int n);
 private:
   void print(int count);
 };
