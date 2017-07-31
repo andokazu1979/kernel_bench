@@ -9,7 +9,7 @@ int Kernel::get_nflop() {
 }
 
 KernelMVM::KernelMVM() {
-  cout << "constructor of KernelMVM" << endl;
+  //cout << "constructor of KernelMVM" << endl;
   dim = 2;
   nflop = 2;
 }
@@ -110,6 +110,16 @@ void KernelMVMCblas::fin(int n) {
   delete[] rv;
   delete[] m;
 }
+
+void KernelMVMCblas::show(int n) {
+    for(int i = 0; i < n; i++) {
+      for(int j = 0; j < n; j++) {
+        cout << rv[i];
+        if(j != n - 1) cout << ", ";
+      }
+      cout << endl;
+    }
+}
 #endif
 
 long gettimeofday_usec() {
@@ -152,7 +162,7 @@ void dummy(Eigen::VectorXd val) {
 #endif
 
 KernelScaling::KernelScaling() {
-  cout << "constructor of KernelScaling" << endl;
+  //cout << "constructor of KernelScaling" << endl;
   dim = 1;
   nflop = 1;
 }
@@ -190,7 +200,7 @@ void KernelScalingClassic::calc(int n_, int nitr_) {
 }
 
 KernelAdd::KernelAdd() {
-  cout << "constructor of KernelAdd" << endl;
+  //cout << "constructor of KernelAdd" << endl;
   dim = 1;
   nflop = 1;
 }

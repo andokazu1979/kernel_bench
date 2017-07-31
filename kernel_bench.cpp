@@ -3,12 +3,36 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
-  //KernelBench kernelbench(new KernelMVMEigen(), new TimerGetTimeOfDayUsec(), 30000);
-  //KernelBench kernelbench(new KernelScalingClassic(), new TimerGetTimeOfDayUsec(), 30000);
-  KernelBench kernelbench(new KernelAddClassic(), new TimerGetTimeOfDayUsec(), 30000);
+  KernelBench* kernelbench = NULL;
+  switch (atoi(argv[1])) {
+  case 1:
+    cout << "MVM Classic" << endl;
+    kernelbench = new KernelBench(new KernelMVMClassic(),       new TimerGetTimeOfDayUsec(), 3000);
+    break;
+  case 2:
+    cout << "MVM CBLAS" << endl;
+    kernelbench = new KernelBench(new KernelMVMCblas(),         new TimerGetTimeOfDayUsec(), 3000);
+    break;
+  case 3:
+    cout << "Scaling Classic" << endl;
+    kernelbench = new KernelBench(new KernelScalingClassic(),   new TimerGetTimeOfDayUsec(), 300000);
+    break;
+  case 4:
+    cout << "Vector Add Classic" << endl;
+    kernelbench = new KernelBench(new KernelAddClassic(),       new TimerGetTimeOfDayUsec(), 300000);
+    break;
+  case 5:
+    cout << "Vector Add Cuda method1" << endl;
+    kernelbench = new KernelBench(new KernelAddCuda(),          new TimerGetTimeOfDayUsec(), 300000);
+    break;
+  case 6:
+    cout << "Vector Add Cuda method2" << endl;
+    kernelbench = new KernelBench(new KernelAddCuda2(),         new TimerGetTimeOfDayUsec(), 300000);
+    break;
+  }
 
-  kernelbench.doProcess();
-  //kernelbench.check(3);
+  kernelbench->doProcess();
+  kernelbench->check(3);
 
   return 0;
 }
@@ -18,7 +42,8 @@ KernelBench::KernelBench(Kernel* kernel_, Timer* timer_, int nmax) {
 
   kernel = kernel_;
   timer = timer_;
-  int interval = 10000;
+  //int interval = 10000;
+  int interval = nmax / 30;
 
   size = nmax / interval;
   n = new int[size];
@@ -56,6 +81,7 @@ void KernelBench::print(int count) {
 void KernelBench::check(int n) {
     kernel->init(n);
     kernel->calc(n, 1);
+    cout << "result:" << endl;
     kernel->show(n);
     kernel->fin(n);
 }

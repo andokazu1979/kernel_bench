@@ -73,6 +73,7 @@ public:
   void init(int n);
   void calc(int n_, int nitr_);
   void fin(int n);
+  void show(int n);
 };
 #endif
 
