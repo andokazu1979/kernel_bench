@@ -269,9 +269,6 @@ void Kernel2DJacobiClassic::calc(int n_, int nitr_) {
       if(i == 0 || i == n_ - 1 || j == 0 || j == n_ - 1) continue;
       itotp = itot-area;
       phi[itot] = (phi[itotp-1] + phi[itotp+1] + phi[itotp-n_] + phi[itotp+n_]) * 0.25;
-      cout << itot << "," << phi[itotp-1] << ", " <<  phi[itotp+1] << ", " << phi[itotp-n_] << ", " << phi[itotp+n_] << endl;
-      cout << (phi[itotp-1] + phi[itotp+1] + phi[itotp-n_] + phi[itotp+n_]) << endl;
-      cout << phi[itot] << endl;
     }
     if(phi[n_*n_*n_-1] < 0) dummy(phi);
   }
