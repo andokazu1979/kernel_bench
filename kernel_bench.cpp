@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
   }
 
   kernelbench->doProcess();
-  kernelbench->check(3);
+  kernelbench->check(4);
 
   return 0;
 }
