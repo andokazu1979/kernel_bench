@@ -29,6 +29,10 @@ int main(int argc, char* argv[]) {
     cout << "Vector Add Cuda method2" << endl;
     kernelbench = new KernelBench(new KernelAddCuda2(),         new TimerGetTimeOfDayUsec(), 300000);
     break;
+  case 7:
+    cout << "2D Jacobi algorithm Classic" << endl;
+    kernelbench = new KernelBench(new Kernel2DJacobiClassic(),  new TimerGetTimeOfDayUsec(), 30);
+    break;
   }
 
   kernelbench->doProcess();

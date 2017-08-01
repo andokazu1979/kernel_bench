@@ -240,3 +240,60 @@ void KernelAddClassic::fin(int n) {
   delete[] v3;
 }
 
+Kernel2DJacobi::Kernel2DJacobi() {
+  //cout << "constructor of Kernel2DJacobi" << endl;
+  dim = 3;
+  nflop = 4;
+}
+
+void Kernel2DJacobiClassic::init(int n) {
+  phi = new double[n*n*n];
+
+  for(int itot = 0; itot < n*n*n; itot++) {
+    int i, j;
+    i = itot % n;
+    j = (itot / n) % n;
+    phi[itot] = i*i + j*j;
+  } 
+}
+
+void Kernel2DJacobiClassic::calc(int n_, int nitr_) {
+  int i, j ,t;
+  int area = n_ * n_;
+  int itotp;
+  for(int itr = 0; itr < nitr_; itr++) {
+    for(int itot = area; itot < n_*n_*n_; itot++) {
+      i = itot % n_;
+      j = (itot / n_) % n_;
+      t = (itot / area);
+      if(i == 0 || i == n_ - 1 || j == 0 || j == n_ - 1) continue;
+      itotp = itot-area;
+      phi[itot] = (phi[itotp-1] + phi[itotp+1] + phi[itotp-n_] + phi[itotp+n_]) * 0.25;
+      cout << itot << "," << phi[itotp-1] << ", " <<  phi[itotp+1] << ", " << phi[itotp-n_] << ", " << phi[itotp+n_] << endl;
+      cout << (phi[itotp-1] + phi[itotp+1] + phi[itotp-n_] + phi[itotp+n_]) << endl;
+      cout << phi[itot] << endl;
+    }
+    if(phi[n_*n_*n_-1] < 0) dummy(phi);
+  }
+}
+
+void Kernel2DJacobiClassic::fin(int n) {
+  delete phi;
+}
+
+void Kernel2DJacobiClassic::show(int n) {
+  int i, j ,t;
+  int area = n * n;
+  for(int itot = 0; itot < n*n*n; itot++) {
+    i = itot % n;
+    j = (itot / n) % n;
+    t = (itot / area);
+    cout << phi[itot] << " ";
+    if(i == n - 1) {
+        if(j == n - 1) cout << endl << endl;
+        else cout << endl;
+    }
+  }
+}
+
+

@@ -138,4 +138,19 @@ public:
 };
 #endif
 
+class Kernel2DJacobi : public Kernel {
+public:
+  Kernel2DJacobi();
+};
+
+class Kernel2DJacobiClassic : public Kernel2DJacobi {
+  double* phi;
+public:
+  void init(int n);
+  void calc(int n_, int nitr_);
+  void fin(int n);
+  void show(int n);
+};
+
+
 #endif
